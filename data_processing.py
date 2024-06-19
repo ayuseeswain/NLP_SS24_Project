@@ -117,6 +117,9 @@ merged_df['processed_lyrics'] = merged_df['cleaned_lyrics'].apply(tokenize_and_l
 tfidf_vectorizer = TfidfVectorizer(max_features=5000)
 
 # Fit and transform the processed lyrics
+tfidf_matrix = tfidf_vectorizer.fit_transform(merged_df['processed_lyrics'].dropna())
+
+# Fit and transform the processed lyrics
 X = tfidf_vectorizer.fit_transform(merged_df['processed_lyrics'].dropna())
 
 # Convert the TF-IDF matrix to a DataFrame for easier inspection
