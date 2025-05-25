@@ -18,33 +18,45 @@ We trained two models:
 
 These models were tested on their ability to predict:
 - Album
-- Year
-- Theme
+- Release Year  
+- Thematic Category (e.g., Nostalgia, Growth)
 
 ---
 
 ## 🔍 Methods Overview
 
 ### 1. Data Collection & Preprocessing
-- Compiled a list of all Taylor Swift songs and their lyrics.
-- Removed irrelevant information and standardized lyrics through tokenization and lemmatization.
+- Collected album metadata (`Album_Lists.csv`) and loaded song lyrics from text files.
+- Applied formatting to align track names with lyric file naming conventions.
+- Lyrics were cleaned via:
+  - Removal of metadata, filler words, special characters
+  - Tokenization using `nltk.word_tokenize`
+  - Stopword removal and lemmatization (`WordNetLemmatizer`)
 
 ### 2. Feature Extraction
-- Used **CountVectorizer** and **TF-IDF** to convert lyrics to numerical representations.
-- Visualized word clouds per album to observe frequent keywords.
+- Applied **TF-IDF Vectorization** (`TfidfVectorizer`) on cleaned lyrics with n-grams up to trigrams.
+- Reduced dimensionality using **PCA**.
+- Balanced data with **SMOTE**.
 
 ### 3. Topic Modeling
-- Applied LDA and NMF to extract latent themes.
-- Analyzed the theme distribution across albums using 20 topics.
+- Extracted 20 latent topics with both NMF and LDA.
+- Visualized:
+  - Top words per topic
+  - Aggregate topic weights
+  - Album-wise topic distribution
+  - Word clouds per album and overall
 
-### 4. Predictive Modeling
-- Used extracted features to train **Random Forest** and **SVM** models.
-- Performed classification tasks using metrics like **accuracy**, **precision**, and **F1-score**.
-- Applied **SMOTE** for class balancing and **PCA** for dimensionality reduction.
+### 4. Sentiment Analysis
+- Used **TextBlob** to assign a polarity score (from -1 to +1) to each track's lyrics.
+- Visualized sentiment distribution with **Plotly** (by album, year, and theme).
 
-### 5. Model Evaluation
-- Compared the performance of NMF vs. LDA and Random Forest vs. SVM.
-- Random Forest outperformed SVM across all prediction tasks.
+### 5. Predictive Modeling
+- Models trained to classify:
+  - Album (multi-class)
+  - Year (multi-class)
+  - Thematic category (multi-class)
+- Hyperparameters optimized using `RandomizedSearchCV` over 5-fold `StratifiedKFold` splits.
+- Features: NMF topic vectors → PCA → standardized (for SVM)
 
 ---
 
@@ -60,8 +72,28 @@ These models were tested on their ability to predict:
 
 ---
 
+## 🎨 Visualizations
+- Word Clouds for each album
+- Topic distributions stacked by album
+- Sentiment vs Year scatter plots
+- Classifier performance bar charts (Accuracy, F1, Precision, Recall)
+
+---
+
 ## 🧪 Results & Insights
 Random Forest, when paired with NMF topic vectors, provided the most accurate predictions for album, year, and theme.
+
+---
+
+## 🧪 Example Input and Output
+
+**Input Lyrics:**
+> We were both young when I first saw you / I close my eyes and the flashback starts...
+
+**Predicted Output:**
+- **Album:** Fearless  
+- **Year:** 2008  
+- **Theme:** Romantic Nostalgia
 
 ---
 
@@ -80,20 +112,7 @@ Random Forest, when paired with NMF topic vectors, provided the most accurate pr
 
 ---
 
-## 🧪 Example Input and Output
-
-**Input Lyrics:**
-> We were both young when I first saw you / I close my eyes and the flashback starts...
-
-**Predicted Output:**
-- **Album:** Fearless  
-- **Year:** 2008  
-- **Theme:** Romantic Nostalgia
-
----
-
 ## 🧠 Conclusion
 
 This project demonstrates how combining topic modeling (NMF) with ensemble learning (Random Forest) can yield robust pipelines for text analysis and classification. While SVM suffered from overfitting, Random Forest handled complex relationships better. The findings highlight how lyrical themes can be linked to albums, time periods, and artistic growth.
 
----
