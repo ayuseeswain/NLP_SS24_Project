@@ -1,17 +1,17 @@
-# 🎤 Topic Modeling on Taylor Swift Songs
+# Topic Modeling on Taylor Swift Songs
 
 This project explores the themes in Taylor Swift's lyrics using **topic modeling** and **predictive modeling** techniques. We aim to identify prominent themes in her songs, understand how these vary across different albums and periods, and build models that can predict the album, release year, or thematic category based on the lyrics.
 
 ---
 
-## 🧠 Techniques Used
+## Techniques Used
 
-### 📌 Topic Modeling
+### Topic Modeling
 We used two unsupervised algorithms:
 - **Latent Dirichlet Allocation (LDA):** A probabilistic model that learns topic distributions over documents.
 - **Non-negative Matrix Factorization (NMF):** A matrix decomposition method that reduces data into interpretable lower-dimensional topics.
 
-### 📌 Predictive Modeling
+### Predictive Modeling
 We trained two models:
 - **Random Forest**
 - **Support Vector Machine (SVM)**
@@ -23,7 +23,7 @@ These models were tested on their ability to predict:
 
 ---
 
-## 🔍 Methods Overview
+## Methods Overview
 
 ### 1. Data Collection & Preprocessing
 - Collected album metadata (`Album_Lists.csv`) and loaded song lyrics from text files.
@@ -60,7 +60,7 @@ These models were tested on their ability to predict:
 
 ---
 
-## 📊 Model Comparison
+## Model Comparison
 
 ### NMF vs. LDA
 - NMF produced **more balanced** and **distinct** topic distributions.
@@ -72,7 +72,7 @@ These models were tested on their ability to predict:
 
 ---
 
-## 🎨 Visualizations
+## Visualizations
 - Word Clouds for each album
 - Topic distributions stacked by album
 - Sentiment vs Year scatter plots
@@ -80,12 +80,12 @@ These models were tested on their ability to predict:
 
 ---
 
-## 🧪 Results & Insights
+## Results & Insights
 Random Forest, when paired with NMF topic vectors, provided the most accurate predictions for album, year, and theme.
 
 ---
 
-## 🧪 Example Input and Output
+## Example Input and Output
 
 **Input Lyrics:**
 > We were both young when I first saw you / I close my eyes and the flashback starts...
@@ -97,7 +97,7 @@ Random Forest, when paired with NMF topic vectors, provided the most accurate pr
 
 ---
 
-## 📦 Requirements
+## Requirements
 
 - `scikit-learn`
 - `pandas`
@@ -112,7 +112,7 @@ Random Forest, when paired with NMF topic vectors, provided the most accurate pr
 
 ---
 
-## 🧠 Conclusion
+## Conclusion
 
 This project demonstrates how combining topic modeling (NMF) with ensemble learning (Random Forest) can yield robust pipelines for text analysis and classification. While SVM suffered from overfitting, Random Forest handled complex relationships better. The findings highlight how lyrical themes can be linked to albums, time periods, and artistic growth.
 
